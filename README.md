@@ -45,3 +45,5 @@ The architecture diagrams are redrawn from implementation records and are labell
 [LinkedIn](https://www.linkedin.com/in/carlosnayadelatorre/) · [GitHub](https://github.com/carlosnayadelatorre) · [Email](mailto:carlosnayadelatorre@gmail.com)
 
 [Portfolio](https://carlosnaya.vercel.app)
+
+[Portfolio](https://carlosnaya.vercel.app)
