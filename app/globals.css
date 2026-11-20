@@ -35,3 +35,9 @@
 .project-media .invoice-dual img{object-fit:cover;object-position:50% 42%}
 .project-media .invoice-dual img:last-child{object-position:50% 36%}
 @media(max-width:600px){.project-media .invoice-dual{height:280px}}
+
+/* Original portrait integrated only in the About section. */
+.about-portrait{width:220px;max-width:100%;margin-top:32px}
+.about-portrait img{display:block;width:100%;height:auto;aspect-ratio:4 / 5;object-fit:cover;border-radius:2px}
+@media(max-width:1000px){.about-portrait{width:200px;margin-top:28px}}
+@media(max-width:600px){.about-portrait{margin-top:24px}}
