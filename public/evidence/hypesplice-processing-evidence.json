@@ -1,0 +1,52 @@
+{
+  "scope": "Five original synthetic exports; existing full-decode QA record plus local MP4 hash verification. Separate from the worker integration test.",
+  "exports": [
+    {
+      "export": "Export 01",
+      "duration_seconds": 9.567,
+      "dimensions": "1080 \u00d7 1920",
+      "codec": "H.264",
+      "fps": 30,
+      "technical_qa": "PASS",
+      "artifact_hash_match": true
+    },
+    {
+      "export": "Export 02",
+      "duration_seconds": 9.3,
+      "dimensions": "1080 \u00d7 1920",
+      "codec": "H.264",
+      "fps": 30,
+      "technical_qa": "PASS",
+      "artifact_hash_match": true
+    },
+    {
+      "export": "Export 03",
+      "duration_seconds": 10.067,
+      "dimensions": "1080 \u00d7 1920",
+      "codec": "H.264",
+      "fps": 30,
+      "technical_qa": "PASS",
+      "artifact_hash_match": true
+    },
+    {
+      "export": "Export 04",
+      "duration_seconds": 10.2,
+      "dimensions": "1080 \u00d7 1920",
+      "codec": "H.264",
+      "fps": 30,
+      "technical_qa": "PASS",
+      "artifact_hash_match": true
+    },
+    {
+      "export": "Export 05",
+      "duration_seconds": 9.933,
+      "dimensions": "1080 \u00d7 1920",
+      "codec": "H.264",
+      "fps": 30,
+      "technical_qa": "PASS",
+      "artifact_hash_match": true
+    }
+  ],
+  "source_record_sha256": "1e26f6358d6dadb269cc1cf3cffad0183c56b5f32d83448b8aa8d58730ca1900",
+  "unverified_scale_claims_included": false
+}

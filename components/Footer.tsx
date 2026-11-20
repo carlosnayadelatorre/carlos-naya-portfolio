@@ -1,0 +1,2 @@
+import {profile} from '@/app/data';
+export default function Footer(){return <footer className="footer wrap"><span>© {new Date().getFullYear()} Carlos Naya</span><span>Wil, St. Gallen · Switzerland</span><div><a href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn</a><a href={profile.github} target="_blank" rel="noreferrer">GitHub</a><a href="/Carlos-Naya-CV.pdf" target="_blank" rel="noreferrer">CV</a></div></footer>}

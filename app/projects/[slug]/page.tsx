@@ -1,0 +1,27 @@
+import type {Metadata} from 'next';
+import Link from 'next/link';
+import {notFound} from 'next/navigation';
+import Header from '@/components/SiteHeader';
+import Footer from '@/components/Footer';
+import {projects,profile} from '@/app/data';
+import processingEvidence from '@/public/evidence/hypesplice-processing-evidence.json';
+
+export function generateStaticParams(){return projects.map(p=>({slug:p.slug}));}
+export async function generateMetadata({params}:{params:Promise<{slug:string}>}):Promise<Metadata>{const {slug}=await params;const p=projects.find(p=>p.slug===slug);return {title:p?.name??'Project',description:p?.intro,...(process.env.NEXT_PUBLIC_SITE_URL?{alternates:{canonical:'/projects/'+slug+'/'}}:{})};}
+
+export default async function Project({params}:{params:Promise<{slug:string}>}){
+  const {slug}=await params;const p=projects.find(p=>p.slug===slug);if(!p)notFound();
+  return <><Header/><main id="main" className={'case-main case-'+p.slug}>
+    <div className="wrap"><Link className="back-link" href="/#work">All selected work</Link><header className="case-head"><p className="eyebrow accent">{p.brand} / {p.category}</p><h1>{p.name}</h1><p>{p.intro}</p></header></div>
+    <figure className="case-cover wrap"><div className="image-stage"><a href={p.image} target="_blank" rel="noreferrer" aria-label="Open project visual at full size"><img src={p.image} alt={p.caption}/></a></div><figcaption>{p.caption}</figcaption></figure>
+    <div className="case-summary wrap"><p className="eyebrow">Business value</p><h2>{p.value}</h2></div>
+    <div className="case-layout wrap"><div className="case-narrative"><section><h2>Business problem</h2><p>{p.problem}</p></section><section><h2>The solution</h2><p>{p.solution}</p></section><section><h2>My contribution</h2><p>{p.contribution}</p></section></div><aside className="case-aside"><p className="eyebrow">Tools & technologies</p><ul className="tool-list">{p.tools.map(t=><li key={t}>{t}</li>)}</ul><a className="text-link" href="#technical-notes">Technical notes & provenance</a></aside></div>
+    <section className="case-features wrap"><p className="eyebrow">System capabilities</p><div>{p.features.map(f=><article key={f.title}><h3>{f.title}</h3><p>{f.text}</p></article>)}</div></section>
+    <section className="architecture-section"><div className="wrap"><div className="section-heading"><p className="eyebrow">Technical architecture</p><h2>{p.headline}</h2></div><div className="architecture-flow" aria-label="Process architecture">{p.architecture.map((s,i)=><div key={s.title}><span className="architecture-mark" aria-hidden="true">{i===p.architecture.length-1?<svg width="22" height="22" viewBox="0 0 22 22"><path d="m4 11 5 5 9-10" fill="none" stroke="currentColor" strokeWidth="1.5"/></svg>:<svg width="22" height="22" viewBox="0 0 22 22"><rect x="4" y="4" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.5"/></svg>}</span><h3>{s.title}</h3><p>{s.detail}</p></div>)}</div><p className="diagram-caption">Architecture summary based on the existing implementation.</p></div></section>
+    <section className="case-results wrap"><div className="section-heading"><p className="eyebrow">Verified results</p><h2>What the work delivers.</h2></div><div className="results-grid">{p.results.map(r=><article key={r.title}><h3>{r.title}</h3><p>{r.text}</p></article>)}</div>{p.slug==='hypesplice'&&<div className="processing-proof"><p className="eyebrow">Processing evidence</p><p>1080 × 1920 · H.264 · 30 fps · 5 / 5 file hashes matched</p><table><caption>Existing technical QA results for five original synthetic exports</caption><thead><tr><th scope="col">Export</th><th scope="col">Duration</th><th scope="col">Technical QA</th></tr></thead><tbody>{processingEvidence.exports.map(row=><tr key={row.export}><th scope="row">{row.export}</th><td>{row.duration_seconds.toFixed(2)} s</td><td>{row.technical_qa}</td></tr>)}</tbody></table><a className="text-link" href="/evidence/hypesplice-processing-evidence.json" target="_blank" rel="noreferrer">View the processing evidence summary</a></div>}</section>
+    {p.slug==='invoice-processing'&&<figure className="extra-evidence wrap"><a href="/evidence/invoice-results.jpg" target="_blank" rel="noreferrer" aria-label="Open invoice spreadsheet evidence"><img src="/evidence/invoice-results.jpg" alt="Actual Google Sheets capture containing the five synthetic invoice test records" loading="lazy"/></a><figcaption>Actual spreadsheet output: five synthetic invoice records. Every record is marked NEEDS_REVIEW.</figcaption></figure>}
+    <section id="technical-notes" className="technical-notes wrap"><details><summary>Implementation scope & provenance<span aria-hidden="true">+</span></summary><div><h3>Verification scope</h3><p>{p.scope}</p><h3>Source materials & adaptations</h3><p>{p.provenance}</p></div></details></section>
+    <section className="case-next wrap"><p className="eyebrow">Continue exploring</p><div>{projects.filter(other=>other.slug!==p.slug).map(other=><Link key={other.slug} href={'/projects/'+other.slug+'/'}><span>{other.category}</span><h3>{other.name}</h3><span className="text-link">View case study</span></Link>)}</div></section>
+    <section className="case-contact wrap"><h2>Bring business thinking<br/>into your next system.</h2><a className="button primary" href={'mailto:'+profile.email}>Discuss an opportunity</a></section>
+  </main><Footer/></>;
+}
